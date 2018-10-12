@@ -92,7 +92,7 @@ namespace Wpf_LoginSystem
             {
                 if (Password1 == Password2)
                 {
-                    List<Member> members = db.Members.Where(p => p.EmployeeID == EmployeeID).ToList();
+                    List<Member> members = db.Members.Where(p => p.EmployeeID == EmployeeID && p.MemberID == MemberID).ToList();
                     if (members.Count != 0)
                     {
                         Member member = members.First();
