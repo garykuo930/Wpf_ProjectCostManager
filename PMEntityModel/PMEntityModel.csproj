@@ -73,6 +73,12 @@
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskResource.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ProjectManagerModel.edmx">
@@ -86,6 +92,8 @@
     <None Include="ProjectManagerModel.edmx.diagram">
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
     </None>
+    <None Include="Properties\DataSources\Resource.datasource" />
+    <None Include="Properties\DataSources\TaskResource.datasource" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProjectManagerModel.Context.tt">

@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +52,12 @@
   <ItemGroup>
     <Reference Include="De.TorstenMandelkow.MetroChart">
       <HintPath>..\packages\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\WPF\NewSolution\Solution1\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\WPF\NewSolution\Solution1\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -75,18 +96,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MyUserControls\UC_Resource.xaml.cs">
+      <DependentUpon>UC_Resource.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ClsPageViewModel.cs" />
     <Compile Include="ViewModel\ClsProjects.cs" />
-    <Compile Include="UserControl\UC_Project.xaml.cs">
+    <Compile Include="MyUserControls\UC_Project.xaml.cs">
       <DependentUpon>UC_Project.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ClsCost.cs" />
+    <Compile Include="ViewModel\ClsResources.cs" />
+    <Compile Include="ViewModel\ClsTaskResource.cs" />
+    <Compile Include="ViewModel\DisplayResource.cs" />
+    <Compile Include="View\Window_AddExpense.xaml.cs">
+      <DependentUpon>Window_AddExpense.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Window_ProjectDetails.xaml.cs">
       <DependentUpon>Window_ProjectDetails.xaml</DependentUpon>
     </Compile>
     <Page Include="Theme\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="MyUserControls\UC_Resource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,7 +134,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControl\UC_Project.xaml">
+    <Page Include="MyUserControls\UC_Project.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window_AddExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,6 +166,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\PMEntityModel.Class1.datasource" />
+    <None Include="Properties\DataSources\PMEntityModel.Employee.datasource" />
+    <None Include="Properties\DataSources\PMEntityModel.Member.datasource" />
+    <None Include="Properties\DataSources\PMEntityModel.Resource.datasource" />
+    <None Include="Properties\DataSources\PMEntityModel.TaskResource.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -174,11 +217,26 @@
   <ItemGroup>
     <Resource Include="Images\Cover-ERP-PM.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 與 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\De.TorstenMandelkow.MetroChart.WPF\De.TorstenMandelkow.MetroChart.WPF.csproj">
       <Project>{4AB4B0DB-780C-48B9-A642-8E527353D957}</Project>
       <Name>De.TorstenMandelkow.MetroChart.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMEntityModel\PMEntityModel.csproj">
+      <Project>{7268b4cd-705a-4ce9-9799-2f4b3fd2dcc9}</Project>
+      <Name>PMEntityModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

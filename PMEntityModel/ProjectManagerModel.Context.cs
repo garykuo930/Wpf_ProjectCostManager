@@ -27,5 +27,7 @@ namespace PMEntityModel
     
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<TaskResource> TaskResources { get; set; }
     }
 }

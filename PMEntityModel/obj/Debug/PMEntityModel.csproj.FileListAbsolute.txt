@@ -6,7 +6,6 @@ C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進�
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\bin\Debug\EntityFramework.xml
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\bin\Debug\zh-Hant\EntityFramework.resources.dll
-C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\obj\Debug\PMEntityModel.csprojAssemblyReference.cache
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\obj\Debug\PMEntityModel.csproj.CoreCompileInputs.cache
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\obj\Debug\PMEntityModel.csproj.CopyComplete
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\PMEntityModel\obj\Debug\PMEntityModel.dll

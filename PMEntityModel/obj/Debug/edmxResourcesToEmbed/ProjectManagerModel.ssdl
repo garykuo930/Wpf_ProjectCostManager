@@ -21,6 +21,31 @@
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="LastLoginDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Resources">
+    <Key>
+      <PropertyRef Name="ResourceID" />
+    </Key>
+    <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResourceName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TaskResource">
+    <Key>
+      <PropertyRef Name="TaskID" />
+      <PropertyRef Name="ResourceID" />
+    </Key>
+    <Property Name="TaskID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ResourceID" Type="int" Nullable="false" />
+    <Property Name="Unit" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="UnitPrice" Type="money" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'ProjectManagement.dbo.View_TaskAndResource' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'ProjectManagement.dbo.vResources' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
   <Association Name="FK_Employee_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
     <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
@@ -45,9 +70,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TaskResource_Resources">
+    <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
+    <End Role="TaskResource" Type="Self.TaskResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resources">
+        <PropertyRef Name="ResourceID" />
+      </Principal>
+      <Dependent Role="TaskResource">
+        <PropertyRef Name="ResourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ProjectManagementModelStoreContainer">
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskResource" EntityType="Self.TaskResource" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Employee_Employee" Association="Self.FK_Employee_Employee">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Employee1" EntitySet="Employee" />
@@ -55,6 +94,10 @@
     <AssociationSet Name="FK_Members_Employee" Association="Self.FK_Members_Employee">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskResource_Resources" Association="Self.FK_TaskResource_Resources">
+      <End Role="Resources" EntitySet="Resources" />
+      <End Role="TaskResource" EntitySet="TaskResource" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

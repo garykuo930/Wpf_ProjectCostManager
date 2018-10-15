@@ -14,6 +14,9 @@ namespace Wpf_ProjectCostManager.ViewModel
         public List<ClsProjects> Projects { get; set; }
         public List<ClsCost> AllCosts { get; set; }
         public List<ClsCost> Costs { get; set; }
+        public List<ClsTaskResource> TaskResources { get; set; }
+        public List<ClsResources> Resources { get; set; }
+
         public double TotalInput;
 
         public ClsPageViewModel()
@@ -23,6 +26,13 @@ namespace Wpf_ProjectCostManager.ViewModel
             Projects.Add(new ClsProjects { ProjectID = "A10001", ProjectName = "發票管理系統", Budget = 50000, Category = "A", RequiredHours = 100, StartDate = DateTime.Now.AddDays(-20), EndDate = DateTime.Now.AddDays(10), RequiredDepartment = "財務部"});
             Projects.Add(new ClsProjects { ProjectID = "B10002", ProjectName = "生產管理系統", Budget = 700000, Category = "B", RequiredHours = 100, StartDate = DateTime.Now.AddDays(-20), EndDate = DateTime.Now.AddDays(100), RequiredDepartment = "資材部" });
 
+            Resources = new List<ClsResources>();
+
+            Resources.Add(new ClsResources { ResourceID = 1, ResourceName = "文具", Category = "辦公室費用" });
+
+            TaskResources = new List<ClsTaskResource>();
+
+            TaskResources.Add(new ClsTaskResource { TaskID = "A10001", ResourceID = 1, Unit = "個", Quantity = 10, UnitPrice = 20, Date = new DateTime(2018,10,15) });
         }
 
         public ClsPageViewModel(string ProjectID)

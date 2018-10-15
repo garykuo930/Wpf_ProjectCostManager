@@ -9,6 +9,9 @@
         <EntityTypeShape EntityType="ProjectManagementModel.Employee" Width="1.5" PointX="3.5" PointY="0.875" />
         <AssociationConnector Association="ProjectManagementModel.FK_Employee_Employee" />
         <AssociationConnector Association="ProjectManagementModel.FK_Members_Employee" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Resource" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TaskResource" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TaskResource_Resources" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

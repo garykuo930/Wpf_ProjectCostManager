@@ -1,0 +1,16 @@
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\ConsoleTest.exe
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\ConsoleTest.pdb
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\EntityFramework.dll
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\PMEntityModel.dll
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\PMEntityModel.pdb
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\PMEntityModel.dll.config
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\EntityFramework.xml
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\bin\Debug\zh-Hant\EntityFramework.resources.dll
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\obj\Debug\ConsoleTest.csprojAssemblyReference.cache
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\obj\Debug\ConsoleTest.csproj.CoreCompileInputs.cache
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\obj\Debug\ConsoleTest.csproj.CopyComplete
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\obj\Debug\ConsoleTest.exe
+C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\ConsoleTest\obj\Debug\ConsoleTest.pdb

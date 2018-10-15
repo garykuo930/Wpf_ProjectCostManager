@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\Wpf_ProjectCostManager\App.xaml
-4-511979551
+6-22114155
 
-141920237497
-23-1498944481
-Theme\Generic.xaml;View\MainWindow.xaml;UserControl\UC_Project.xaml;View\Window_ProjectDetails.xaml;
+19-902753017
+26-481702616
+Theme\Generic.xaml;MyUserControls\UC_Resource.xaml;View\MainWindow.xaml;MyUserControls\UC_Project.xaml;View\Window_AddExpense.xaml;View\Window_ProjectDetails.xaml;
 
-True
+False
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_ProjectCostManager.View;
 using Wpf_ProjectCostManager.ViewModel;
 
 namespace Wpf_ProjectCostManager
@@ -56,6 +57,47 @@ namespace Wpf_ProjectCostManager
                 P.Click += OpenProject;
                 this.wrapPanel.Children.Add(P);
             }
+
+            CollectionViewSource taskResourceViewSource = this.Resources["taskResourceViewSource"] as CollectionViewSource;
+
+            var q = from p in dbContext.Resources
+                    from c in p.TaskResources
+                    select new DisplayResource { ResourceID = c.ResourceID, ResourceName = p.ResourceName, TaskID = this.tb_TaskID.Text, Quantity = c.Quantity, Unit = c.Unit, UnitPrice = c.UnitPrice, SubTotal = (c.UnitPrice * c.Quantity), Date = DateTime.Now, Description = c.Description};
+
+            // 透過設定 CollectionViewSource.Source 屬性載入資料: 
+            //taskResourceViewSource.Source = dbContext.vResources.ToList();
+            //taskResourceViewSource.Source = dbContext.vResources.Local;
+            taskResourceViewSource.Source = q.ToList();
+            this.taskResourceDataGrid.IsReadOnly = true;
+        }
+
+        PMEntityModel.ProjectManagementEntities dbContext = new PMEntityModel.ProjectManagementEntities();
+
+        private void Add(object sender, RoutedEventArgs e)
+        {
+            Window w = new Window_AddExpense();
+            w.Show();
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Modify(object sender, RoutedEventArgs e)
+        {
+            this.taskResourceDataGrid.IsReadOnly = false;
+        }
+
+        private void Remove(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            this.taskResourceDataGrid.IsReadOnly = true;
+            dbContext.SaveChanges();
         }
     }
 }

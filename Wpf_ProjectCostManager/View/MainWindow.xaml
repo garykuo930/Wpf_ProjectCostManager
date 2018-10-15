@@ -1,24 +1,66 @@
-﻿<Window x:Class="Wpf_ProjectCostManager.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_ProjectCostManager"
+        xmlns:PMEntityModel="clr-namespace:PMEntityModel;assembly=PMEntityModel" x:Class="Wpf_ProjectCostManager.MainWindow"
         mc:Ignorable="d"
         Background="Gray"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="taskResourceViewSource" d:DesignSource="{d:DesignInstance {x:Type PMEntityModel:TaskResource}, CreateList=True}"/>
+    </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="16*"/>
-            <ColumnDefinition Width="83*"/>
-        </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header="專案列表">
+                <Grid Background="Gray">
+                    <WrapPanel x:Name="wrapPanel"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="費用新增">
+                <Grid Background="Gray" DataContext="{StaticResource taskResourceViewSource}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="39*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="312*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="新增" Width="50" Margin="3" Click="Add"/>
+                        <Button Content="查詢" Width="50" Margin="3" Click="Search"/>
+                        <Button Content="修改" Width="50" Margin="3" Click="Modify"/>
+                        <Button Content="刪除" Width="50" Margin="3" Click="Remove"/>
+                        <Button Content="存檔" Width="50" Margin="3" Click="Save"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Rectangle Width="5"/>
+                        <TextBlock TextWrapping="Wrap" Text="專案代號：" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb_TaskID" Height="23" TextWrapping="Wrap" Text="A10001" Width="120"/>
+                        <Rectangle Width="50"/>
+                        <TextBlock TextWrapping="Wrap" Text="專案名稱：" VerticalAlignment="Center"/>
+                        <TextBox Height="23" TextWrapping="Wrap" Text="" Width="120"/>
 
-        <WrapPanel Name="wrapPanel" Grid.Column="1"/>
-        <StackPanel>
-            <Button Content="專案列表" Margin="5,5,0,5" BorderThickness="0" Background="Transparent" Foreground="White" HorizontalAlignment="Left" Width="113"/>
-            <Button Content="各部門成本分攤" Margin="5,5,0,5" BorderThickness="0" Background="Transparent" Foreground="White" HorizontalAlignment="Left" Width="113"/>
-            <Button Content="整體執行情況" Margin="5,5,0,5" BorderThickness="0" Background="Transparent" Foreground="White" HorizontalAlignment="Left" Width="113"/>
-            <Button Content="參數設定" Margin="5,5,0,5" BorderThickness="0" Background="Transparent" Foreground="White" HorizontalAlignment="Left" Width="113"/>
-        </StackPanel>
+                    </StackPanel>
+                    <DataGrid x:Name="taskResourceDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="2" RowDetailsVisibilityMode="VisibleWhenSelected" Background="Gray">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn x:Name="dateColumn" Header="日期" Width="130">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding Date, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn x:Name="resourceIDColumn" Binding="{Binding ResourceID}" Header="費用編號" Width="100"/>
+                            <DataGridTextColumn x:Name="resourceNameColumn" Binding="{Binding ResourceName}" Header="費用名稱" Width="150"/>
+                            <DataGridTextColumn x:Name="quantityColumn" Binding="{Binding Quantity}" Header="數量" Width="50"/>
+                            <DataGridTextColumn x:Name="unitColumn" Binding="{Binding Unit}" Header="單位" Width="50"/>
+                            <DataGridTextColumn x:Name="unitPriceColumn" Binding="{Binding UnitPrice}" Header="單價" Width="100"/>
+                            <DataGridTextColumn x:Name="subtotalColumn" Binding="{Binding Subtotal}" Header="小計" Width="100"/>
+                            <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="備註" Width="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

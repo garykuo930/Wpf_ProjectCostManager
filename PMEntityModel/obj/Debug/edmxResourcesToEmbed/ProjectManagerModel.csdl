@@ -23,6 +23,12 @@
       <End Role="Employee" EntitySet="Employees" />
       <End Role="Member" EntitySet="Members" />
     </AssociationSet>
+    <EntitySet Name="Resources" EntityType="ProjectManagementModel.Resource" />
+    <EntitySet Name="TaskResources" EntityType="ProjectManagementModel.TaskResource" />
+    <AssociationSet Name="FK_TaskResource_Resources" Association="ProjectManagementModel.FK_TaskResource_Resources">
+      <End Role="Resource" EntitySet="Resources" />
+      <End Role="TaskResource" EntitySet="TaskResources" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Employee">
     <Key>
@@ -58,6 +64,41 @@
       </Principal>
       <Dependent Role="Member">
         <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="ResourceID" />
+    </Key>
+    <Property Name="ResourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TaskResources" Relationship="ProjectManagementModel.FK_TaskResource_Resources" FromRole="Resource" ToRole="TaskResource" />
+  </EntityType>
+  <EntityType Name="TaskResource">
+    <Key>
+      <PropertyRef Name="TaskID" />
+      <PropertyRef Name="ResourceID" />
+    </Key>
+    <Property Name="TaskID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="Unit" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resource" Relationship="ProjectManagementModel.FK_TaskResource_Resources" FromRole="TaskResource" ToRole="Resource" />
+  </EntityType>
+  <Association Name="FK_TaskResource_Resources">
+    <End Type="ProjectManagementModel.Resource" Role="Resource" Multiplicity="1" />
+    <End Type="ProjectManagementModel.TaskResource" Role="TaskResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="ResourceID" />
+      </Principal>
+      <Dependent Role="TaskResource">
+        <PropertyRef Name="ResourceID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

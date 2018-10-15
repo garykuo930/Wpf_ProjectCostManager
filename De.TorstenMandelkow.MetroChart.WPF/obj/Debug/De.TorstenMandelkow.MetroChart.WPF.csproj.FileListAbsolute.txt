@@ -29,4 +29,3 @@ C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進�
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\De.TorstenMandelkow.MetroChart.WPF\obj\Debug\De.TorstenMandelkow.MetroChart.WPF.csproj.CoreCompileInputs.cache
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\De.TorstenMandelkow.MetroChart.WPF\obj\Debug\De.TorstenMandelkow.MetroChart.dll
 C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\De.TorstenMandelkow.MetroChart.WPF\obj\Debug\De.TorstenMandelkow.MetroChart.pdb
-C:\Users\III\Google 雲端硬碟\CShasrpLearning\統一證券專題－專案進度管理\MyWPF\Wpf_ProjectCostManager\De.TorstenMandelkow.MetroChart.WPF\obj\Debug\De.TorstenMandelkow.MetroChart.WPF.csprojAssemblyReference.cache
