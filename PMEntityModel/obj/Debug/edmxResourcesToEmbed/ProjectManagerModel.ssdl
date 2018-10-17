@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ProjectManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="DepartmentName" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="EmployeeID" />
@@ -21,31 +28,105 @@
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="LastLoginDate" Type="datetime" />
   </EntityType>
-  <EntityType Name="Resources">
+  <EntityType Name="Project">
     <Key>
-      <PropertyRef Name="ResourceID" />
+      <PropertyRef Name="ProjectID" />
     </Key>
-    <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ResourceName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProjectID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="RequiredDeptID" Type="nchar" MaxLength="10" />
+    <Property Name="RequiredDeptPMID" Type="nchar" MaxLength="10" />
+    <Property Name="ProjectName" Type="nvarchar(max)" />
+    <Property Name="EstStartDate" Type="nvarchar(max)" />
+    <Property Name="EstEndDate" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="InChargeDeptID" Type="nchar" MaxLength="10" />
+    <Property Name="InChargeDeptPMID" Type="nchar" MaxLength="10" />
+    <Property Name="ProjectStatusID" Type="nchar" MaxLength="10" />
+    <Property Name="ProjectCategoryID" Type="nchar" MaxLength="10" />
+    <Property Name="ProjectSupervisorID" Type="nchar" MaxLength="10" />
+    <Property Name="IsGeneralManagerConcerned" Type="bit" />
+    <Property Name="Budget" Type="money" />
+  </EntityType>
+  <EntityType Name="ResourceCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TaskResource">
     <Key>
-      <PropertyRef Name="TaskID" />
       <PropertyRef Name="ResourceID" />
     </Key>
     <Property Name="TaskID" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="ResourceID" Type="int" Nullable="false" />
+    <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResourceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
     <Property Name="Unit" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="UnitPrice" Type="money" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'ProjectManagement.dbo.View_TaskAndResource' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
-  <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'ProjectManagement.dbo.vResources' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="WorkID" Type="nchar" MaxLength="10" />
+    <Property Name="TaskID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="TaskName" Type="nvarchar(max)" />
+    <Property Name="EstStartDate" Type="nvarchar(max)" />
+    <Property Name="EstEndDate" Type="nvarchar(max)" />
+    <Property Name="EstWorkTime" Type="nchar" MaxLength="10" />
+    <Property Name="StartDate" Type="nvarchar(max)" />
+    <Property Name="EndDate" Type="nvarchar(max)" />
+    <Property Name="WorkTime" Type="nchar" MaxLength="10" />
+    <Property Name="TaskStatusID" Type="nchar" MaxLength="10" />
+    <Property Name="EmployeeID" Type="nchar" MaxLength="10" />
+    <Property Name="Tag" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Works">
+    <Key>
+      <PropertyRef Name="WorkID" />
+    </Key>
+    <Property Name="ProjectID" Type="nchar" MaxLength="10" />
+    <Property Name="EmployeeID" Type="nchar" MaxLength="10" />
+    <Property Name="ParentWorkID" Type="nchar" MaxLength="10" />
+    <Property Name="WorkID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="WorkName" Type="nvarchar(max)" />
+    <Property Name="WorkEstStartDate" Type="nvarchar(max)" />
+    <Property Name="WorkEstEndDate" Type="nvarchar(max)" />
+    <Property Name="WorkStartDate" Type="nvarchar(max)" />
+    <Property Name="WorkEndDate" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="WorkStatusID" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_ActivityList_ProjectWork">
+    <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorkID" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="WorkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Employee_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
     <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
@@ -70,23 +151,155 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TaskResource_Resources">
-    <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
+  <Association Name="FK_Project_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="RequiredDeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Department1">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="InChargeDeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="RequiredDeptPMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Employee1">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="InChargeDeptPMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Employee2">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="ProjectSupervisorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectWork_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Works" Type="Self.Works" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Works">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectWork_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="Works" Type="Self.Works" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectID" />
+      </Principal>
+      <Dependent Role="Works">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectWork_ProjectWork">
+    <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+    <End Role="Works1" Type="Self.Works" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorkID" />
+      </Principal>
+      <Dependent Role="Works1">
+        <PropertyRef Name="ParentWorkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskResource_ResourceCategory">
+    <End Role="ResourceCategory" Type="Self.ResourceCategory" Multiplicity="0..1" />
     <End Role="TaskResource" Type="Self.TaskResource" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Resources">
-        <PropertyRef Name="ResourceID" />
+      <Principal Role="ResourceCategory">
+        <PropertyRef Name="CategoryID" />
       </Principal>
       <Dependent Role="TaskResource">
-        <PropertyRef Name="ResourceID" />
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskResource_Tasks">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+    <End Role="TaskResource" Type="Self.TaskResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="TaskID" />
+      </Principal>
+      <Dependent Role="TaskResource">
+        <PropertyRef Name="TaskID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="EmployeeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ProjectManagementModelStoreContainer">
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResourceCategory" EntityType="Self.ResourceCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaskResource" EntityType="Self.TaskResource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActivityList_ProjectWork" Association="Self.FK_ActivityList_ProjectWork">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
     <AssociationSet Name="FK_Employee_Employee" Association="Self.FK_Employee_Employee">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Employee1" EntitySet="Employee" />
@@ -95,9 +308,49 @@
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Members" EntitySet="Members" />
     </AssociationSet>
-    <AssociationSet Name="FK_TaskResource_Resources" Association="Self.FK_TaskResource_Resources">
-      <End Role="Resources" EntitySet="Resources" />
+    <AssociationSet Name="FK_Project_Department" Association="Self.FK_Project_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Department1" Association="Self.FK_Project_Department1">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Employee" Association="Self.FK_Project_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Employee1" Association="Self.FK_Project_Employee1">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Employee2" Association="Self.FK_Project_Employee2">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectWork_Employee" Association="Self.FK_ProjectWork_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectWork_Project" Association="Self.FK_ProjectWork_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectWork_ProjectWork" Association="Self.FK_ProjectWork_ProjectWork">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Works1" EntitySet="Works" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskResource_ResourceCategory" Association="Self.FK_TaskResource_ResourceCategory">
+      <End Role="ResourceCategory" EntitySet="ResourceCategory" />
       <End Role="TaskResource" EntitySet="TaskResource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskResource_Tasks" Association="Self.FK_TaskResource_Tasks">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="TaskResource" EntitySet="TaskResource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Employee" Association="Self.FK_Tasks_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Tasks" EntitySet="Tasks" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

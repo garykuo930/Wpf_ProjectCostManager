@@ -64,7 +64,7 @@ namespace Wpf_LoginSystem
             }
         }
 
-        public void Login(string MemberID, string Password)
+        public bool Login(string MemberID, string Password)
         {
             List<Member> members = db.Members.Where(p => p.MemberID == MemberID && p.Password == Password).ToList();
             if (members.Count != 0)
@@ -73,16 +73,19 @@ namespace Wpf_LoginSystem
                 try
                 {
                     db.SaveChanges();
-                    MessageBox.Show("登入成功");
+                    MessageBox.Show("歡迎使用!");
+                    return true;
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
+                    return false;
                 }
             }
             else
             {
                 MessageBox.Show("帳號或密碼錯誤");
+                return false;
             }
         }
 

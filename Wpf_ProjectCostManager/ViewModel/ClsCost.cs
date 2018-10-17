@@ -23,8 +23,8 @@ namespace Wpf_ProjectCostManager.ViewModel
 
         public string Category { get; set; }
 
-        private float _number = 0;
-        public float Number
+        private decimal _number = 0;
+        public decimal Number
         {
             get
             {

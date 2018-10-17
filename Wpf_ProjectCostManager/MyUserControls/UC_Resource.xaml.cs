@@ -24,10 +24,42 @@ namespace Wpf_ProjectCostManager.MyUserControls
         {
             InitializeComponent();
             this.btn_Add.Click += Btn_Add_Click; ;
-            this.btn_Remove.Click += Btn_Remove_Click; ;
+            this.btn_Remove.Click += Btn_Remove_Click;
+            this.tb_Quantity.TextChanged += Tb_Quantity_TextChanged;
+            this.tb_UnitPrice.TextChanged += Tb_UnitPrice_TextChanged;
+            this.tb_SubTotal.TextChanged += Tb_SubTotal_TextChanged;
         }
+
+        private void Tb_SubTotal_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.SubTotalChanged != null)
+            {
+                this.SubTotalChanged.Invoke(this, e);
+            }
+        }
+
+        private void Tb_UnitPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.UnitPriceChanged != null)
+            {
+                this.UnitPriceChanged.Invoke(this, e);
+            }
+        }
+
+        private void Tb_Quantity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(this.QuantityChanged != null)
+            {
+                this.QuantityChanged.Invoke(this, e);
+            }
+        }
+
         public event RoutedEventHandler Add;
         public event RoutedEventHandler Remove;
+        public event TextChangedEventHandler QuantityChanged;
+        public event TextChangedEventHandler UnitPriceChanged;
+        public event TextChangedEventHandler SubTotalChanged;
+
 
         private void Btn_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -56,11 +88,37 @@ namespace Wpf_ProjectCostManager.MyUserControls
                 this.dp_ExpenseDate.SelectedDate = value;
             }
         }
+        public ItemCollection TaskNames
+        {
+            get
+            {
+                return this.cb_TaskName.Items;
+            }
+            set
+            {
+                this.cb_TaskName.Items.Add(value);
+            }
+        }
         public string ResourceName
         {
             get
             {
-                return this.cb_Expense.SelectionBoxItem.ToString();
+                return this.tb_ResourceName.Text;
+            }
+            set
+            {
+                this.tb_ResourceName.Text = value;
+            }
+        }
+        public ItemCollection Categories
+        {
+            get
+            {
+                return this.cb_Category.Items;
+            }
+            set
+            {
+                this.cb_Category.Items.Add(value);
             }
         }
         public int Quantity
@@ -73,6 +131,10 @@ namespace Wpf_ProjectCostManager.MyUserControls
             set
             {
                 this.tb_Quantity.Text = value.ToString();
+                if(this.UnitPrice != 0)
+                {
+                    this.SubTotal = this.Quantity * this.UnitPrice;
+                }
             }
         }
         public string Unit
@@ -96,6 +158,40 @@ namespace Wpf_ProjectCostManager.MyUserControls
             set
             {
                 this.tb_UnitPrice.Text = value.ToString();
+            }
+        }
+        public decimal SubTotal
+        {
+            get
+            {
+                decimal.TryParse(this.tb_SubTotal.Text, out decimal amount);
+                return amount;
+            }
+            set
+            {
+                this.tb_SubTotal.Text = value.ToString();
+            }
+        }
+        public string SelectedCategory
+        {
+            get
+            {
+                return this.cb_Category.SelectedItem.ToString();
+            }
+            set
+            {
+                this.cb_Category.SelectedItem = value;
+            }
+        }
+        public string SelectedTask
+        {
+            get
+            {
+                return this.cb_TaskName.SelectedItem.ToString();
+            }
+            set
+            {
+                this.cb_TaskName.SelectedItem = value;
             }
         }
     }

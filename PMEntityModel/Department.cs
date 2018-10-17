@@ -12,19 +12,24 @@ namespace PMEntityModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Resource
+    public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Resource()
+        public Department()
         {
-            this.TaskResources = new HashSet<TaskResource>();
+            this.Employees = new HashSet<Employee>();
+            this.Projects = new HashSet<Project>();
+            this.Projects1 = new HashSet<Project>();
         }
     
-        public int ResourceID { get; set; }
-        public string ResourceName { get; set; }
-        public string CategoryName { get; set; }
+        public string DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaskResource> TaskResources { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects1 { get; set; }
     }
 }

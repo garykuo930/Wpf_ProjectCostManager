@@ -19,9 +19,9 @@ namespace Wpf_ProjectCostManager
     /// <summary>
     /// ProjectItem.xaml 的互動邏輯
     /// </summary>
-    public partial class Project : System.Windows.Controls.UserControl
+    public partial class UC_Project : System.Windows.Controls.UserControl
     {
-        public Project()
+        public UC_Project()
         {
             InitializeComponent();
         }

@@ -15,7 +15,7 @@ namespace Wpf_LoginSystem
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             Window M = new MainWindow();
             M.Show();

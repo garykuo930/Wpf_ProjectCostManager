@@ -8,8 +8,8 @@ namespace Wpf_ProjectCostManager.ViewModel
 {
     class DisplayResource
     {
-        public string TaskID { get; set; }
         public int ResourceID { get; set; }
+        public string CategoryName { get; set; }
         public string ResourceName { get; set; }
         public string Unit { get; set; }
         public int Quantity { get; set; }

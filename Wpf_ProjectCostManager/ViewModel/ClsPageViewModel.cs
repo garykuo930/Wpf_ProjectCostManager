@@ -5,68 +5,57 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PMEntityModel;
 
 namespace Wpf_ProjectCostManager.ViewModel
 {
     class ClsPageViewModel : INotifyPropertyChanged
     {
-        public List<SeriesData> Series { get; set; }
-        public List<ClsProjects> Projects { get; set; }
-        public List<ClsCost> AllCosts { get; set; }
+        //public List<SeriesData> Series { get; set; }
         public List<ClsCost> Costs { get; set; }
-        public List<ClsTaskResource> TaskResources { get; set; }
-        public List<ClsResources> Resources { get; set; }
-
         public double TotalInput;
 
-        public ClsPageViewModel()
-        {
-            Projects = new List<ClsProjects>();
-
-            Projects.Add(new ClsProjects { ProjectID = "A10001", ProjectName = "發票管理系統", Budget = 50000, Category = "A", RequiredHours = 100, StartDate = DateTime.Now.AddDays(-20), EndDate = DateTime.Now.AddDays(10), RequiredDepartment = "財務部"});
-            Projects.Add(new ClsProjects { ProjectID = "B10002", ProjectName = "生產管理系統", Budget = 700000, Category = "B", RequiredHours = 100, StartDate = DateTime.Now.AddDays(-20), EndDate = DateTime.Now.AddDays(100), RequiredDepartment = "資材部" });
-
-            Resources = new List<ClsResources>();
-
-            Resources.Add(new ClsResources { ResourceID = 1, ResourceName = "文具", Category = "辦公室費用" });
-
-            TaskResources = new List<ClsTaskResource>();
-
-            TaskResources.Add(new ClsTaskResource { TaskID = "A10001", ResourceID = 1, Unit = "個", Quantity = 10, UnitPrice = 20, Date = new DateTime(2018,10,15) });
-        }
+        ProjectManagementEntities dbContext = new ProjectManagementEntities();
 
         public ClsPageViewModel(string ProjectID)
         {
-            AllCosts = new List<ClsCost>();
-
-            AllCosts.Add(new ClsCost { ProjectID = "A10001", Category = "租金", Number = 5000 });
-            AllCosts.Add(new ClsCost { ProjectID = "A10001", Category = "材料", Number = 2000 });
-            AllCosts.Add(new ClsCost { ProjectID = "A10001", Category = "人力", Number = 6000 });
-            AllCosts.Add(new ClsCost { ProjectID = "A10001", Category = "折舊", Number = 4000 });
-
-            AllCosts.Add(new ClsCost { ProjectID = "B10002", Category = "租金", Number = 50000 });
-            AllCosts.Add(new ClsCost { ProjectID = "B10002", Category = "材料", Number = 20000 });
-            AllCosts.Add(new ClsCost { ProjectID = "B10002", Category = "人力", Number = 60000 });
-            AllCosts.Add(new ClsCost { ProjectID = "B10002", Category = "折舊", Number = 40000 });
-
-            Series = new List<SeriesData>();
+            var q = from p in dbContext.Projects
+                     join w in dbContext.Works on p.ProjectID equals w.ProjectID
+                     join t in dbContext.Tasks on w.WorkID equals t.WorkID
+                     join tr in dbContext.TaskResources on t.TaskID equals tr.TaskID
+                     join c in dbContext.ResourceCategories on tr.CategoryID equals c.CategoryID
+                     where p.ProjectID == ProjectID
+                     group tr by c.CategoryName into g
+                     select new { Category = g.Key, Group = g };
 
             Costs = new List<ClsCost>();
 
-            foreach(var cost in AllCosts.Where(p => p.ProjectID == ProjectID))
+            foreach (var cat in q.ToList())
             {
-                Costs.Add(cost);
-            }
-
-            Series.Add(new SeriesData { DisplayName = "Costs", Items = Costs});
-
-            foreach(var data in Series)
-            {
-                foreach(var c in data.Items.Where(p => p.ProjectID == ProjectID))
+                decimal subtotal = 0;
+                foreach(var data in cat.Group)
                 {
-                    TotalInput += c.Number;
+                    subtotal += data.Quantity * data.UnitPrice;
                 }
+                Costs.Add(new ClsCost { Category = cat.Category, Number = subtotal });
             }
+
+            foreach(var data in Costs)
+            {
+                TotalInput += (double)data.Number;
+            }
+
+            //Series = new List<SeriesData>();
+
+            //Series.Add(new SeriesData { DisplayName = "Costs", Items = Costs});
+
+            //foreach (var data in Series)
+            //{
+            //    foreach (var c in data.Items)
+            //    {
+            //        TotalInput += (double)c.Number;
+            //    }
+            //}
         }
 
         private object selectedItem = null;

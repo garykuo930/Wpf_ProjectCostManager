@@ -24,12 +24,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Resources">
-      <EntityTypeMapping TypeName="ProjectManagementModel.Resource">
-        <MappingFragment StoreEntitySet="Resources">
+    <EntitySetMapping Name="ResourceCategories">
+      <EntityTypeMapping TypeName="ProjectManagementModel.ResourceCategory">
+        <MappingFragment StoreEntitySet="ResourceCategory">
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-          <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
-          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -41,8 +40,75 @@
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
           <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
           <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="ProjectManagementModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+          <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EstWorkTime" ColumnName="EstWorkTime" />
+          <ScalarProperty Name="EstEndDate" ColumnName="EstEndDate" />
+          <ScalarProperty Name="EstStartDate" ColumnName="EstStartDate" />
+          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="ProjectManagementModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="IsGeneralManagerConcerned" ColumnName="IsGeneralManagerConcerned" />
+          <ScalarProperty Name="ProjectSupervisorID" ColumnName="ProjectSupervisorID" />
+          <ScalarProperty Name="ProjectCategoryID" ColumnName="ProjectCategoryID" />
+          <ScalarProperty Name="ProjectStatusID" ColumnName="ProjectStatusID" />
+          <ScalarProperty Name="InChargeDeptPMID" ColumnName="InChargeDeptPMID" />
+          <ScalarProperty Name="InChargeDeptID" ColumnName="InChargeDeptID" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EstEndDate" ColumnName="EstEndDate" />
+          <ScalarProperty Name="EstStartDate" ColumnName="EstStartDate" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="RequiredDeptPMID" ColumnName="RequiredDeptPMID" />
+          <ScalarProperty Name="RequiredDeptID" ColumnName="RequiredDeptID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="ProjectManagementModel.Work">
+        <MappingFragment StoreEntitySet="Works">
+          <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="WorkEndDate" ColumnName="WorkEndDate" />
+          <ScalarProperty Name="WorkStartDate" ColumnName="WorkStartDate" />
+          <ScalarProperty Name="WorkEstEndDate" ColumnName="WorkEstEndDate" />
+          <ScalarProperty Name="WorkEstStartDate" ColumnName="WorkEstStartDate" />
+          <ScalarProperty Name="WorkName" ColumnName="WorkName" />
+          <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+          <ScalarProperty Name="ParentWorkID" ColumnName="ParentWorkID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="ProjectManagementModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

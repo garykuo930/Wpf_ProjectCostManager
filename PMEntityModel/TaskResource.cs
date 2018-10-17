@@ -16,12 +16,15 @@ namespace PMEntityModel
     {
         public string TaskID { get; set; }
         public int ResourceID { get; set; }
+        public string ResourceName { get; set; }
+        public Nullable<int> CategoryID { get; set; }
         public string Unit { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public System.DateTime Date { get; set; }
         public string Description { get; set; }
     
-        public virtual Resource Resource { get; set; }
+        public virtual ResourceCategory ResourceCategory { get; set; }
+        public virtual Task Task { get; set; }
     }
 }

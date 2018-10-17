@@ -34,7 +34,10 @@ namespace Wpf_LoginSystem
             MemberID = this.tb_ID.Text;
             Password = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(this.tb_PW.Text, "MD5");
             ClsAccountViewModel VM = new ClsAccountViewModel();
-            VM.Login(MemberID, Password);
+            if(VM.Login(MemberID, Password))
+            {
+                DialogResult = true;
+            }
         }
 
         private void Register(object sender, RoutedEventArgs e)

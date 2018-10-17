@@ -16,11 +16,16 @@ namespace Wpf_ProjectCostManager
         protected override void OnStartup(StartupEventArgs e)
         {
             this.ShutdownMode = ShutdownMode.OnMainWindowClose;
-
             Window M = new MainWindow();
-            M.Show();
+            //Wpf_LoginSystem.MainWindow w = new Wpf_LoginSystem.MainWindow();
+            //if ((bool)w.ShowDialog())
+            //{
+                M.Show();
+            //}
+            //else
+            //{
+            //    M.Close();
+            //}
         }
     }
-
-
 }

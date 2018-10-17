@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf_ProjectCostManager"
         xmlns:PMEntityModel="clr-namespace:PMEntityModel;assembly=PMEntityModel" x:Class="Wpf_ProjectCostManager.MainWindow"
         mc:Ignorable="d"
-        Background="Gray"
+        Background="#FF404040"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="taskResourceViewSource" d:DesignSource="{d:DesignInstance {x:Type PMEntityModel:TaskResource}, CreateList=True}"/>
@@ -14,34 +14,36 @@
     <Grid>
         <TabControl>
             <TabItem Header="專案列表">
-                <Grid Background="Gray">
+                <Grid Background="#FF404040">
                     <WrapPanel x:Name="wrapPanel"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="費用新增">
-                <Grid Background="Gray" DataContext="{StaticResource taskResourceViewSource}">
+            <TabItem Header="費用管理">
+                <Grid Background="#FF404040" DataContext="{StaticResource taskResourceViewSource}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="39*"/>
                         <RowDefinition Height="32*"/>
                         <RowDefinition Height="312*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="新增" Width="50" Margin="3" Click="Add"/>
-                        <Button Content="查詢" Width="50" Margin="3" Click="Search"/>
-                        <Button Content="修改" Width="50" Margin="3" Click="Modify"/>
-                        <Button Content="刪除" Width="50" Margin="3" Click="Remove"/>
-                        <Button Content="存檔" Width="50" Margin="3" Click="Save"/>
+                        <Button x:Name="btn_add" Content="新增" Width="100" Margin="3" Click="Add" IsEnabled="True" Foreground="White" Background="DarkCyan"/>
+                        <Button x:Name="btn_search" Content="查詢" Width="100" Margin="3" Click="Search" IsEnabled="True" Foreground="White" Background="DarkCyan"/>
+                        <Button x:Name="btn_modify" Content="修改" Width="100" Margin="3" Click="Modify" IsEnabled="True" Foreground="White" Background="DarkCyan"/>
+                        <Button x:Name="btn_delete" Content="刪除" Width="100" Margin="3" Click="Remove" IsEnabled="True" Foreground="White" Background="DarkCyan"/>
+                        <Button x:Name="btn_save" Content="存檔" Width="100" Margin="3" Click="Save" IsEnabled="True" Foreground="White" Background="DarkCyan"/>
+                        <Button x:Name="btn_reverse" Content="取消變更" Width="100" Margin="3" Click="Reverse" IsEnabled="True" Foreground="White" Background="DarkCyan"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Rectangle Width="5"/>
-                        <TextBlock TextWrapping="Wrap" Text="專案代號：" VerticalAlignment="Center"/>
-                        <TextBox x:Name="tb_TaskID" Height="23" TextWrapping="Wrap" Text="A10001" Width="120"/>
+                        <TextBlock Foreground="White" Text="專案代號：" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb_ProjectID" Height="23" TextWrapping="Wrap" Text="" Width="120" TextChanged="tb_ProjectID_TextChanged"/>
                         <Rectangle Width="50"/>
-                        <TextBlock TextWrapping="Wrap" Text="專案名稱：" VerticalAlignment="Center"/>
-                        <TextBox Height="23" TextWrapping="Wrap" Text="" Width="120"/>
-
+                        <TextBlock Foreground="white" Text="專案名稱：" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb_ProjectName" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+                        <Rectangle Width="10"/>
+                        <Button Content="..." Width="22" Foreground="White" Background="#FF404040" Click="LoadProject"/>
                     </StackPanel>
-                    <DataGrid x:Name="taskResourceDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="2" RowDetailsVisibilityMode="VisibleWhenSelected" Background="Gray">
+                    <DataGrid x:Name="taskResourceDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="2" RowDetailsVisibilityMode="VisibleWhenSelected" Background="#FF404040" CanUserAddRows="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="dateColumn" Header="日期" Width="130">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -50,13 +52,13 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn x:Name="resourceIDColumn" Binding="{Binding ResourceID}" Header="費用編號" Width="100"/>
-                            <DataGridTextColumn x:Name="resourceNameColumn" Binding="{Binding ResourceName}" Header="費用名稱" Width="150"/>
+                            <DataGridTextColumn x:Name="resourceIDColumn" Binding="{Binding ResourceName}" Header="費用名稱" Width="100"/>
+                            <DataGridComboBoxColumn x:Name="resourceNameColumn" SelectedItemBinding="{Binding CategoryName}" Header="費用類別" Width="150"/>
                             <DataGridTextColumn x:Name="quantityColumn" Binding="{Binding Quantity}" Header="數量" Width="50"/>
                             <DataGridTextColumn x:Name="unitColumn" Binding="{Binding Unit}" Header="單位" Width="50"/>
-                            <DataGridTextColumn x:Name="unitPriceColumn" Binding="{Binding UnitPrice}" Header="單價" Width="100"/>
-                            <DataGridTextColumn x:Name="subtotalColumn" Binding="{Binding Subtotal}" Header="小計" Width="100"/>
-                            <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="備註" Width="200"/>
+                            <DataGridTextColumn x:Name="unitPriceColumn" Binding="{Binding UnitPrice, StringFormat=C2}" Header="單價" Width="100"/>
+                            <DataGridTextColumn x:Name="subtotalColumn" Binding="{Binding SubTotal, StringFormat=C2}" Header="小計" Width="100"/>
+                            <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="備註" Width="500"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

@@ -7,7 +7,7 @@
         xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
-        Background="Gray"
+        Background="#FF404040"
         Title="Window_ProjectDetails" Height="450" Width="800">
     <Viewbox Stretch="Fill">
         <Grid Height="417" Width="792">
@@ -33,9 +33,9 @@
             <TextBox x:Name="tb_InputCost" HorizontalAlignment="Left" Height="23" Margin="636,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="2" IsReadOnly="True"/>
             <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="540,65,0,0" TextWrapping="Wrap" Text="估計總成本：" VerticalAlignment="Top" Grid.Row="2" Height="22" Width="100"/>
             <TextBox x:Name="tb_TotalCost" HorizontalAlignment="Left" Height="23" Margin="636,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="2" IsReadOnly="True"/>
-            <ProgressBar x:Name="progressBar_Complete" Value="50" Foreground="#FF439E9E" Margin="114,41,287,45" Grid.Row="2" Background="White" />
+            <ProgressBar x:Name="progressBar_Complete" Value="50" Foreground="#FF439E9E" Margin="114,41,287,45" Grid.Row="2" Background="White" Loaded="progressBar_Complete_Loaded" />
             <ProgressBar x:Name="progressBar_Budget" Value="50" Foreground="#FFC163C1" Background="#FFE6E6E6" Margin="114,70,287,16" Grid.Row="2" Loaded="progressBar_Budget_Loaded"/>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,520,0">
+            <!--<StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,520,0">
                 <chart:PieChart                     
                     Style="{StaticResource ChartStyle}"
                     ChartTitle="Costs"
@@ -47,12 +47,12 @@
                             ItemsSource="{Binding Costs}"/>
                     </chart:PieChart.Series>
                 </chart:PieChart>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="272" Margin="272,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="520">
-                <chart:ClusteredBarChart Height="272" Width="Auto"
+            </StackPanel>-->
+            <StackPanel Grid.Row="1">
+                <chart:ClusteredBarChart
                                          Style="{StaticResource ChartStyle}" 
-                                         ChartTitle="Bar Chart"
-                                         ChartSubTitle="Bar Chart Testing">
+                                         ChartTitle="Project Costs"
+                                         ChartSubTitle="Group by Resource Category" Height="272">
                     <chart:ClusteredBarChart.Series>
                         <chart:ChartSeries
                             Caption="Costs"
@@ -63,6 +63,8 @@
                     </chart:ClusteredBarChart.Series>
                 </chart:ClusteredBarChart>
             </StackPanel>
+            <Label HorizontalContentAlignment="Center" Content="50%"  x:Name="lb_Finished" Foreground="#FF686A6B" FontSize="11" HorizontalAlignment="Left" Margin="292,35,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26"/>
+            <Label HorizontalContentAlignment="Center" Content="50%" x:Name="lb_BudgetUsed" Foreground="#FF686A6B" FontSize="11" HorizontalAlignment="Left" Margin="292,64,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26"/>
         </Grid>
     </Viewbox>
 </Window>

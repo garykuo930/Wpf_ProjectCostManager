@@ -6,12 +6,28 @@
     <edmx:Diagrams>
       <Diagram DiagramId="5149efd237c240b7b929549c58b3ec18" Name="Diagram1">
         <EntityTypeShape EntityType="ProjectManagementModel.Member" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectManagementModel.Employee" Width="1.5" PointX="3.5" PointY="0.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Employee" Width="1.5" PointX="2.875" PointY="0.5" />
         <AssociationConnector Association="ProjectManagementModel.FK_Employee_Employee" />
         <AssociationConnector Association="ProjectManagementModel.FK_Members_Employee" />
-        <EntityTypeShape EntityType="ProjectManagementModel.Resource" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="ProjectManagementModel.TaskResource" Width="1.5" PointX="3" PointY="4.875" />
-        <AssociationConnector Association="ProjectManagementModel.FK_TaskResource_Resources" />
+        <EntityTypeShape EntityType="ProjectManagementModel.ResourceCategory" Width="1.75" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TaskResource" Width="1.75" PointX="3.875" PointY="5" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TaskResource_ResourceCategory" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Task" Width="1.5" PointX="6" PointY="4.75" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Tasks_Employee" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Project" Width="1.5" PointX="5.75" PointY="10.125" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Work" Width="1.5" PointX="9" PointY="5.75" />
+        <AssociationConnector Association="ProjectManagementModel.FK_ProjectWork_Employee" />
+        <AssociationConnector Association="ProjectManagementModel.FK_ProjectWork_Project" />
+        <AssociationConnector Association="ProjectManagementModel.FK_ActivityList_ProjectWork" />
+        <AssociationConnector Association="ProjectManagementModel.FK_ProjectWork_ProjectWork" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Project_Employee" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Project_Employee1" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Project_Employee2" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TaskResource_Tasks" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Department" Width="1.5" PointX="0.75" PointY="9.25" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Employee_Department" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Project_Department" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Project_Department1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -51,10 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Department.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProjectManagerModel.Context.cs">
@@ -73,10 +79,16 @@
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource.cs">
+    <Compile Include="ResourceCategory.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Task.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TaskResource.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Work.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

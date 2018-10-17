@@ -104,11 +104,16 @@ namespace Wpf_ProjectCostManager
                 this.tb_TotalCost.Text = value.ToString("C2");
             }
         }
-
         private void progressBar_Budget_Loaded(object sender, RoutedEventArgs e)
         {
             InputCost = ((ClsPageViewModel)DataContext).TotalInput;
             this.progressBar_Budget.Value = (InputCost / TotalCost)*100;
+            this.lb_BudgetUsed.Content = (InputCost / TotalCost).ToString("#0.00%");
+        }
+
+        private void progressBar_Complete_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.lb_Finished.Content = (this.progressBar_Complete.Value/100).ToString("#0.00%");
         }
     }
 }

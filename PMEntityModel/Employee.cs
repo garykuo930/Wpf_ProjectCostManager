@@ -19,6 +19,11 @@ namespace PMEntityModel
         {
             this.Employee1 = new HashSet<Employee>();
             this.Members = new HashSet<Member>();
+            this.Tasks = new HashSet<Task>();
+            this.Works = new HashSet<Work>();
+            this.Projects = new HashSet<Project>();
+            this.Projects1 = new HashSet<Project>();
+            this.Projects2 = new HashSet<Project>();
         }
     
         public string EmployeeID { get; set; }
@@ -32,5 +37,16 @@ namespace PMEntityModel
         public virtual Employee Employee2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Task> Tasks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Work> Works { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects2 { get; set; }
+        public virtual Department Department { get; set; }
     }
 }
